@@ -1,0 +1,5 @@
+{
+  "accentColor": { "editor": "color", "default": "#9A7B4F", "tsType": "string", "options": ["#9A7B4F", "#3F5C50", "#7C6A8A", "#8A5A44"], "section": "Brand" },
+  "showPricing": { "editor": "boolean", "default": true, "tsType": "boolean", "section": "Catalogue" },
+  "showWhatsApp": { "editor": "boolean", "default": true, "tsType": "boolean", "section": "Contact" }
+}
