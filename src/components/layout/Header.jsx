@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import { COLORS, btnPrimary } from '../../styles/theme';
+import logo from '../../assets/logo.png';
 
 /**
  * @param {{ navItems: Array, goHome: Function, goContact: Function }} props
  */
 export default function Header({ navItems, goHome, goContact }) {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const closeMenu = () => setMenuOpen(false);
+
     return (
         <header
             style={{
@@ -55,16 +61,14 @@ export default function Header({ navItems, goHome, goContact }) {
             >
                 <div
                     onClick={goHome}
-                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'baseline', gap: '9px', whiteSpace: 'nowrap' }}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '9px', whiteSpace: 'nowrap' }}
                 >
-                    <span style={{ fontSize: '24px', fontWeight: '700', letterSpacing: '-.01em', color: COLORS.ink }}>
-                        Leap Edge
-                    </span>
+                    <img src={logo} alt="Leap Edge" style={{ height: '44px', width: 'auto', display: 'block' }} />
                     <span style={{ fontSize: '12px', letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: '600' }}>
                         Interiors
                     </span>
                 </div>
-                <nav style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px clamp(14px,1.8vw,26px)' }}>
+                <nav className="header-nav" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px clamp(14px,1.8vw,26px)' }}>
                     {navItems.map((n) => (
                         <span
                             key={n.label}
@@ -85,10 +89,58 @@ export default function Header({ navItems, goHome, goContact }) {
                 <button
                     type="button"
                     onClick={goContact}
+                    className="header-cta-desktop"
                     style={{ ...btnPrimary, padding: '12px 22px', whiteSpace: 'nowrap' }}
                 >
                     Get a Free Quote
                 </button>
+                <button
+                    type="button"
+                    aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={menuOpen}
+                    onClick={() => setMenuOpen((v) => !v)}
+                    className={`header-toggle${menuOpen ? ' is-open' : ''}`}
+                >
+                    <span className="header-toggle-bar" />
+                    <span className="header-toggle-bar" />
+                    <span className="header-toggle-bar" />
+                </button>
+            </div>
+            <div className={`header-mobile-wrap${menuOpen ? ' is-open' : ''}`}>
+                <nav className="header-mobile-panel">
+                    {navItems.map((n, i) => (
+                        <span
+                            key={n.label}
+                            onClick={() => {
+                                n.go();
+                                closeMenu();
+                            }}
+                            style={{
+                                cursor: 'pointer',
+                                fontWeight: n.weight,
+                                color: n.color,
+                                borderBottom: `2px solid ${n.underline}`,
+                                transitionDelay: menuOpen ? `${i * 35}ms` : '0ms',
+                            }}
+                        >
+                            {n.label}
+                        </span>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => {
+                            goContact();
+                            closeMenu();
+                        }}
+                        style={{
+                            ...btnPrimary,
+                            padding: '12px 22px',
+                            transitionDelay: menuOpen ? `${navItems.length * 35}ms` : '0ms',
+                        }}
+                    >
+                        Get a Free Quote
+                    </button>
+                </nav>
             </div>
         </header>
     );
