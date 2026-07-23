@@ -9,7 +9,7 @@ export default function ClientsPage({ testimonials }) {
                 <div style={eyebrow}>Reviews</div>
                 <h1 style={{ ...h1, maxWidth: '760px', marginBottom: '14px' }}>What our clients say</h1>
                 <p style={{ ...body, maxWidth: '600px', margin: 0 }}>
-                    92% of our projects come from referrals and repeat clients. Here's why.
+                    88% of our projects come from referrals and repeat clients. Here's why.
                 </p>
             </Reveal>
 

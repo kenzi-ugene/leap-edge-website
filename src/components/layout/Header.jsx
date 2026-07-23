@@ -40,20 +40,21 @@ export default function Header({ navItems, goHome, goContact }) {
                         gap: '8px 24px',
                     }}
                 >
-                    <span>Design &amp; build for landed homes across the Klang Valley</span>
+                    <span>Based in Bukit Mertajam, serving across Penang Mainland, Island, Kedah &amp; Perak</span>
                     <span>
-                        Call us: +60 3 7931 2288 · Mon–Sat, 10am–7pm
+                        Contact us: WhatsApp +60 17-438 9294 · Mon–Sat, 10am–7pm
                     </span>
                 </div>
             </div>
             <div
+                className="header-bar"
                 style={{
                     maxWidth: '1200px',
                     margin: '0 auto',
                     padding: '14px clamp(20px,3.5vw,40px)',
                     minHeight: '76px',
                     display: 'flex',
-                    flexWrap: 'wrap',
+                    flexWrap: 'nowrap',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: '12px clamp(16px,2vw,28px)',
@@ -65,35 +66,56 @@ export default function Header({ navItems, goHome, goContact }) {
                 >
                     <img src={logo} alt="Leap Edge" style={{ height: '44px', width: 'auto', display: 'block' }} />
                     <span style={{ fontSize: '12px', letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: '600' }}>
-                        Interiors
+                        Renovation
                     </span>
                 </div>
-                <nav className="header-nav" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px clamp(14px,1.8vw,26px)' }}>
-                    {navItems.map((n) => (
-                        <span
-                            key={n.label}
-                            onClick={n.go}
-                            style={{
-                                cursor: 'pointer',
-                                fontSize: '15px',
-                                fontWeight: n.weight,
-                                color: n.color,
-                                padding: '6px 0',
-                                borderBottom: `2px solid ${n.underline}`,
-                            }}
-                        >
-                            {n.label}
-                        </span>
-                    ))}
-                </nav>
-                <button
-                    type="button"
-                    onClick={goContact}
-                    className="header-cta-desktop"
-                    style={{ ...btnPrimary, padding: '12px 22px', whiteSpace: 'nowrap' }}
+                <div
+                    className="header-nav-row"
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'nowrap',
+                        alignItems: 'center',
+                        gap: 'clamp(16px,2vw,28px)',
+                        minWidth: 0,
+                    }}
                 >
-                    Get a Free Quote
-                </button>
+                    <nav
+                        className="header-nav"
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'nowrap',
+                            alignItems: 'center',
+                            gap: '8px clamp(12px,1.6vw,24px)',
+                            minWidth: 0,
+                        }}
+                    >
+                        {navItems.map((n) => (
+                            <span
+                                key={n.label}
+                                onClick={n.go}
+                                style={{
+                                    cursor: 'pointer',
+                                    fontSize: '15px',
+                                    fontWeight: n.weight,
+                                    color: n.color,
+                                    padding: '6px 0',
+                                    borderBottom: `2px solid ${n.underline}`,
+                                    whiteSpace: 'nowrap',
+                                }}
+                            >
+                                {n.label}
+                            </span>
+                        ))}
+                    </nav>
+                    <button
+                        type="button"
+                        onClick={goContact}
+                        className="header-cta-desktop"
+                        style={{ ...btnPrimary, padding: '12px 22px', whiteSpace: 'nowrap', flexShrink: 0 }}
+                    >
+                        Arrange a Site Consultation
+                    </button>
+                </div>
                 <button
                     type="button"
                     aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -138,7 +160,7 @@ export default function Header({ navItems, goHome, goContact }) {
                             transitionDelay: menuOpen ? `${navItems.length * 35}ms` : '0ms',
                         }}
                     >
-                        Get a Free Quote
+                        Arrange a Site Consultation
                     </button>
                 </nav>
             </div>

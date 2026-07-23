@@ -1,4 +1,4 @@
-# Leap Edge Interiors — React
+# Leap Edge Renovation — React
 
 React conversion of the bundled **Leap Edge Website** HTML export (Design Canvas format).
 

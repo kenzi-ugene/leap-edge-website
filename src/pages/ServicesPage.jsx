@@ -7,9 +7,9 @@ export default function ServicesPage({ services, advantages }) {
         <div data-screen-label="Services">
             <Reveal as="section" style={{ ...section, paddingBottom: '56px' }}>
                 <div style={eyebrow}>Services</div>
-                <h1 style={{ ...h1, maxWidth: '760px' }}>Design &amp; build, under one roof</h1>
+                <h1 style={{ ...h1, maxWidth: '760px' }}>Renovation, under one roof</h1>
                 <p style={{ ...body, maxWidth: '620px', margin: 0 }}>
-                    Three ways of working with us. Each one comes with the same standard: founder-led design, transparent pricing, and our own builders on site.
+                    Three ways of working with us. Each one comes with the same standard: dedicated project management, transparent pricing, and our own tradesmen on site.
                 </p>
             </Reveal>
 

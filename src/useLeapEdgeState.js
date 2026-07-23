@@ -3,22 +3,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 const PAGES = [
   ['home', 'Home', 'Home'],
   ['studio', 'About Us', 'About Us'],
-  ['portfolio', 'Our Work', 'Our Work'],
+  ['portfolio', 'Our Projects', 'Our Projects'],
   ['services', 'Services', 'Services'],
-  ['process', 'How It Works', 'How It Works'],
+  ['process', 'How We Work', 'How We Work'],
   ['catalogue', 'Spaces & Pricing', 'Spaces & Pricing'],
   ['clients', 'Reviews', 'Reviews'],
 ];
 
 const PROJECTS = [
-  { name: 'Stillwater Residence', type: 'BUNGALOW', loc: 'Country Heights', meta: 'Country Heights · 9,600 sq ft · RM 3.2M', blurb: 'A lakeside estate reimagined around a central courtyard — travertine, fluted walnut, and full-height glazing to the water.', slotId: 'proj-stillwater' },
-  { name: 'Casa Vireo', type: 'BUNGALOW', loc: 'Damansara Heights', meta: 'Damansara Heights · 8,200 sq ft · RM 2.4M', blurb: 'Tropical modernism for a three-generation household; a double-volume family hall anchors two private wings.', slotId: 'proj-vireo' },
-  { name: 'Amber Ridge', type: 'BUNGALOW', loc: 'Ampang', meta: 'Ampang · 7,400 sq ft · RM 2.1M', blurb: 'Hillside living with a bronze-and-oak palette, a sunken lounge, and a lanai built for entertaining forty.', slotId: 'proj-amber' },
-  { name: 'The Ledger House', type: 'BUNGALOW', loc: 'Bangsar', meta: 'Bangsar · 6,800 sq ft · RM 1.9M', blurb: 'A 1970s bungalow gut-renovated into a gallery-like home for a serious art collection.', slotId: 'proj-ledger' },
-  { name: 'The Atrium Home', type: 'SEMI-D', loc: 'Subang Jaya', meta: 'Subang Jaya · 4,800 sq ft · RM 1.05M', blurb: 'A skylit atrium threads through three floors, bringing garden light into every room.', slotId: 'proj-atrium' },
-  { name: 'Serene Court', type: 'SEMI-D', loc: 'Petaling Jaya', meta: 'Petaling Jaya · 4,500 sq ft · RM 980K', blurb: 'Quiet luxury on a compact footprint — limewash, linen, and joinery that hides a working household.', slotId: 'proj-serene' },
-  { name: 'The Garden Wing', type: 'SEMI-D', loc: 'TTDI', meta: 'TTDI · 4,100 sq ft · RM 860K', blurb: 'An extension and full renovation that dissolves the wall between kitchen, dining, and garden.', slotId: 'proj-garden' },
-  { name: 'Halcyon House', type: 'SUPERLINK', loc: 'Setia Alam', meta: 'Setia Alam · 3,200 sq ft · RM 520K', blurb: 'Proof that superlinks deserve estate-level detailing — bespoke joinery on every floor.', slotId: 'proj-halcyon' },
+  { name: 'Stillwater Residence', type: 'BUNGALOW', loc: 'Bukit Mertajam', meta: 'Bukit Mertajam · 3,400 sq ft · RM 420K', blurb: 'A full renovation and rear extension gave this bungalow a new dry kitchen and family hall — completed while the family continued living on site.', slotId: 'proj-stillwater' },
+  { name: 'Casa Vireo', type: 'BUNGALOW', loc: 'Alma', meta: 'Alma · 2,800 sq ft · RM 310K', blurb: 'Structural restructuring opened the ground floor into a single connected living and dining space, with new tiling, ceiling and electrical works throughout.', slotId: 'proj-vireo' },
+  { name: 'Amber Ridge', type: 'BUNGALOW', loc: 'Butterworth', meta: 'Butterworth · 3,100 sq ft · RM 365K', blurb: 'Roof and awning replacement, rewiring and a full bathroom upgrade brought this ageing bungalow up to modern standards without changing its footprint.', slotId: 'proj-amber' },
+  { name: 'The Ledger House', type: 'BUNGALOW', loc: 'Juru', meta: 'Juru · 2,600 sq ft · RM 240K', blurb: 'A kitchen extension and carpentry-led makeover turned a dated bungalow into a practical family home.', slotId: 'proj-ledger' },
+  { name: 'The Atrium Home', type: 'SEMI-D', loc: 'Simpang Ampat', meta: 'Simpang Ampat · 2,200 sq ft · RM 195K', blurb: 'Hacking and masonry works reconfigured the layout, with new plumbing and tiling carried through the wet areas.', slotId: 'proj-atrium' },
+  { name: 'Serene Court', type: 'SEMI-D', loc: 'Machang Bubok', meta: 'Machang Bubok · 2,000 sq ft · RM 165K', blurb: 'A side extension and full kitchen upgrade, coordinated from site inspection through to final handover.', slotId: 'proj-serene' },
+  { name: 'The Garden Wing', type: 'SEMI-D', loc: 'Perai', meta: 'Perai · 1,950 sq ft · RM 150K', blurb: 'A rear extension dissolved the wall between kitchen, dining, and garden, with new ceiling and electrical works throughout.', slotId: 'proj-garden' },
+  { name: 'Halcyon House', type: 'SUPERLINK', loc: 'Kulim', meta: 'Kulim · 1,700 sq ft · RM 98K', blurb: 'Proof that terrace and superlink homes deserve the same care — tiling, carpentry and finishing done properly on a practical budget.', slotId: 'proj-halcyon' },
 ];
 
 const SPACES = [
@@ -52,6 +52,7 @@ export function useLeapEdgeState(props = {}) {
   const [formMessage, setFormMessage] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [formDone, setFormDone] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false);
 
   const go = useCallback((nextPage) => {
     setPage(nextPage);
@@ -78,17 +79,56 @@ export function useLeapEdgeState(props = {}) {
     }
   }, []);
 
-  const submitForm = useCallback(() => {
+  const submitForm = useCallback(async () => {
     if (!formName.trim() || !formPhone.trim()) {
       setErrorMsg('Please share your name and phone number so we can reach you.');
       return;
     }
-    setFormDone(true);
+
+    setFormSubmitting(true);
     setErrorMsg('');
-  }, [formName, formPhone]);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/leapedge8228@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formName.trim(),
+          phone: formPhone.trim(),
+          email: formEmail.trim() || 'not provided',
+          property: formProperty,
+          budget: formBudget,
+          message: formMessage.trim() || 'No message provided',
+          _subject: `New Leap Edge enquiry from ${formName.trim()}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success === 'false' || result.success === false) {
+        throw new Error(result.message || 'Unable to send your enquiry right now.');
+      }
+
+      setFormDone(true);
+    } catch (error) {
+      setErrorMsg(
+        error instanceof Error && error.message
+          ? error.message
+          : 'Unable to send your enquiry. Please WhatsApp us at +60 17-438 9294.',
+      );
+    } finally {
+      setFormSubmitting(false);
+    }
+  }, [formName, formPhone, formEmail, formProperty, formBudget, formMessage]);
 
   const resetForm = useCallback(() => {
     setFormDone(false);
+    setFormSubmitting(false);
     setFormName('');
     setFormPhone('');
     setFormEmail('');
@@ -142,71 +182,72 @@ export function useLeapEdgeState(props = {}) {
       goClients: () => go('clients'),
       goContact: () => go('contact'),
       stats: [
-        { value: '180+', label: 'Homes completed' },
-        { value: '14', label: 'Years in business' },
-        { value: 'RM 210M', label: 'Project value delivered' },
-        { value: '92%', label: 'Clients from referrals' },
+        { value: '120+', label: 'Homes completed' },
+        { value: '10+', label: 'Years in business' },
+        { value: 'RM 45M', label: 'Project value delivered' },
+        { value: '88%', label: 'Clients from referrals' },
       ],
       featured: PROJECTS.slice(0, 4),
-      serviceAreas: ['Kuala Lumpur', 'Petaling Jaya', 'Damansara', 'Subang Jaya', 'Ampang', 'Bangsar', 'TTDI', 'Setia Alam'],
+      serviceAreas: ['Bukit Mertajam', 'Alma', 'Machang Bubok', 'Juru', 'Perai', 'Butterworth', 'Simpang Ampat', 'Kulim'],
       homeTypes: [
-        { title: 'Bungalows', desc: 'Full design and build for detached homes of every size.' },
+        { title: 'Bungalows', desc: 'Renovation, restructuring, and extension for detached homes of every size.' },
         { title: 'Semi-detached homes', desc: 'Renovation, extension, and interior fit-out.' },
-        { title: 'Superlink & terrace homes', desc: 'Smart layouts and quality finishes on practical budgets.' },
-        { title: 'New builds', desc: 'From empty land to move-in ready, one contract.' },
+        { title: 'Terrace House', desc: 'Smart layouts and quality finishes on practical budgets.' },
+        { title: 'Extensions', desc: 'Kitchen, bedroom, and rear extensions, engineered and documented properly.' },
         { title: 'Full renovations', desc: 'Structural work, wet works, wiring, and plumbing.' },
         { title: 'Kitchens & bathrooms', desc: 'The two rooms that matter most, done properly.' },
       ],
       serviceTeasers: [
-        { num: '01', title: 'Design & Build', desc: 'We design your home and build it with our own team. One contract, one price, one point of contact from start to finish.' },
-        { num: '02', title: 'Renovation & Extension', desc: 'Extensions, structural work, rewiring, plumbing, and full makeovers for landed homes — properly engineered and documented.' },
-        { num: '03', title: 'Furnishing & Styling', desc: 'Furniture, lighting, and finishing touches so your home is ready to live in from day one.' },
+        { num: '01', title: 'Consultation & Design', desc: 'We assess your site, understand your requirements and propose practical renovation solutions based on your budget, lifestyle and available space. Layout planning and 2D or 3D visualisation are available for selected projects.' },
+        { num: '02', title: 'Refurbishment & Restructuring', desc: 'We refurbish ageing spaces and restructure existing layouts to improve functionality, comfort and appearance. Works may include hacking, masonry, partitioning, plumbing, electrical rewiring, tiling and ceiling modifications.' },
+        { num: '03', title: 'Renovation & Rebuilding', desc: 'From kitchen extensions and bathroom upgrades to rebuilding damaged or outdated sections, we coordinate the renovation works, materials and specialist trades through to final completion.' },
       ],
       values: [
         { num: '01', title: 'Honest pricing', desc: 'Itemised, open-book quotations. You see the same numbers we do — material by material, trade by trade.' },
-        { num: '02', title: 'A founder on your site', desc: 'A founding principal walks every site weekly. Quality checks are never delegated.' },
+        { num: '02', title: 'A dedicated project manager', desc: 'A dedicated project manager walks your site weekly. Quality checks are never delegated.' },
         { num: '03', title: 'Built to last', desc: 'We design for the decade after handover — materials that age well and layouts that adapt as your family grows.' },
       ],
       credentials: [
-        'CIDB Grade G7 registered contractor',
-        'Winner, Malaysia Interior Design Awards — Residential, 2023 & 2025',
-        'Panel designer for three private banks\u2019 client programmes',
-        'In-house quantity surveying and M&E coordination',
+        'CIDB Grade G3 registered contractor',
+        'Over 10 years’ experience serving Penang Mainland, Kedah & Perak',
+        'Dedicated project manager for every renovation',
+        'In-house coordination from site inspection to final handover',
       ],
       portfolioFilters,
       filteredProjects: PROJECTS.filter((p) => pFilter === 'All' || p.type === pFilter.toUpperCase()),
       services: [
-        { num: '01', title: 'Full Residence Design & Build', longDesc: 'For new builds and whole-home transformations. We take the project from measured survey through authority submissions, interior architecture, and construction — one contract, one warranty, one team accountable for the result.', scope: ['Spatial planning & interior architecture', 'Authority submission & compliance', 'In-house construction & project management', 'Turnkey handover with 24-month warranty'] },
-        { num: '02', title: 'Renovation & Extension', longDesc: 'Landed homes evolve with the families in them. We handle structural reconfiguration, rear and side extensions, full wet works, and system upgrades — engineered properly, documented fully, and finished to estate standard.', scope: ['Structural works & extensions', 'Wet works, roofing & waterproofing', 'Electrical, plumbing & smart-home M&E', 'Kitchen & bathroom transformation'] },
-        { num: '03', title: 'Furnishing & Styling', longDesc: 'The final layer that makes a house yours. Loose furniture procurement, custom upholstery, art and objet curation, and styling for homes nearing completion — including show units for landed developments.', scope: ['Furniture curation & procurement', 'Custom upholstery & joinery pieces', 'Art, lighting & accessory styling', 'Move-in coordination'] },
+        { num: '01', title: 'Consultation & Design', longDesc: 'We assess your site, understand your requirements and propose practical renovation solutions based on your budget, lifestyle and available space. Layout planning and 2D or 3D visualisation are available for selected projects.', scope: ['Site assessment & requirements review', 'Budget & lifestyle-based space planning', '2D / 3D visualisation for selected projects', 'Itemised, practical proposal'] },
+        { num: '02', title: 'Refurbishment & Restructuring', longDesc: 'We refurbish ageing spaces and restructure existing layouts to improve functionality, comfort and appearance. Works may include hacking, masonry, partitioning, plumbing, electrical rewiring, tiling and ceiling modifications.', scope: ['Hacking, masonry & partitioning', 'Plumbing & electrical rewiring', 'Tiling & ceiling modifications', 'Layout restructuring for better flow'] },
+        { num: '03', title: 'Renovation & Rebuilding', longDesc: 'From kitchen extensions and bathroom upgrades to rebuilding damaged or outdated sections, we coordinate the renovation works, materials and specialist trades through to final completion.', scope: ['Kitchen extensions & bathroom upgrades', 'Rebuilding damaged or outdated sections', 'Materials & specialist trade coordination', 'Site inspection through to final handover'] },
       ],
       advantages: [
-        { title: 'One accountable party', desc: 'No designer-versus-contractor finger-pointing. The team that draws it is the team that builds it — and warrants it.' },
-        { title: 'Cost certainty', desc: 'Design decisions are priced as they are made. You approve a number before we build, not after.' },
-        { title: 'Faster by months', desc: 'Design and procurement overlap with early works. Our residences complete 20–30% faster than split contracts.' },
+        { title: 'One accountable party', desc: 'No back-and-forth between separate designers and contractors. One team manages your renovation from consultation to final handover.' },
+        { title: 'Cost certainty', desc: 'Decisions are priced as they are made. You approve a number before we build, not after.' },
+        { title: 'Local project coordination', desc: 'Your dedicated project manager coordinates every trade, from masonry to final finishing, so nothing falls between the cracks.' },
       ],
       steps: [
         { num: '01', duration: 'Week 1', title: 'Free consultation', desc: 'A conversation about how you live — at our office or your property. You leave with an honest view of what is feasible and what it will cost.' },
-        { num: '02', duration: 'Weeks 2–5', title: 'Concept & space planning', desc: 'Measured survey, spatial studies, and a design concept with mood direction and preliminary costing. This is where the home takes its shape.' },
-        { num: '03', duration: 'Weeks 6–10', title: 'Design development', desc: 'Detailed drawings, material selections from our library, joinery design, and lighting plans — refined with you, room by room.' },
+        { num: '02', duration: 'Weeks 2–5', title: 'Concept & space planning', desc: 'Measured survey, space planning, and a practical renovation concept with preliminary costing. This is where the project takes its shape.' },
+        { num: '03', duration: 'Weeks 6–10', title: 'Design development', desc: 'Detailed drawings, material selections from our showroom, and finishing plans — refined with you, room by room.' },
         { num: '04', duration: 'Weeks 10–12', title: 'Quotation & contract', desc: 'An itemised, open-book quotation. Every material, every trade, every provisional sum — agreed before a single hack begins.' },
-        { num: '05', duration: 'Months 4–12', title: 'Construction', desc: 'Our own builders, supervised weekly by a founding principal. You receive photo progress reports and a live cost ledger throughout.' },
-        { num: '06', duration: 'Final month', title: 'Styling & handover', desc: 'Deep clean, furniture placement, styling, and a room-by-room walkthrough. Then the keys — with a 24-month workmanship warranty.' },
+        { num: '05', duration: 'Months 4–12', title: 'Construction', desc: 'Our own builders, supervised weekly by your dedicated project manager. You receive photo progress reports and a live cost ledger throughout.' },
+        { num: '06', duration: 'Final month', title: 'Finishing & handover', desc: 'Deep clean, final touch-ups, and a room-by-room walkthrough. Then the keys — with local project coordination through to handover.' },
       ],
       showPricing,
       catalogueFilters,
       filteredSpaces: SPACES.filter((x) => cFilter === 'All' || x.cat === cFilter.toUpperCase()),
       testimonials: [
-        { quote: 'They treated our home with the same care we do. Every ringgit was accounted for, every detail considered — and they handed over two weeks early.', name: 'Datin Serena L.', project: 'Bungalow · Damansara Heights' },
-        { quote: 'We interviewed five firms. Leap Edge was the only one that talked about how we live before showing us a single picture. The house feels like it was always meant to be this way.', name: 'Mr. & Mrs. Tan', project: 'Semi-D · TTDI' },
-        { quote: 'The open-book costing changed everything for us. There was never a surprise invoice, never a vague variation order. Just quiet competence, month after month.', name: 'Dr. Harvinder S.', project: 'Bungalow · Country Heights' },
-        { quote: 'Our renovation ran while we lived abroad. The weekly reports were so thorough we never once felt out of touch. We returned to a finished home — and it was better than the renders.', name: 'En. Azlan & Pn. Farah', project: 'Bungalow · Ampang' },
+        { quote: 'They treated our home with the same care we do. Every ringgit was accounted for, every detail considered — and they handed over two weeks early.', name: 'Mr Yong, Homeowner', project: 'd’Courtyards, Taman Serikaya, Bukit Mertajam' },
+        { quote: 'We got quotes from several contractors. Leap Edge was the only one that walked the site with us and explained what was actually possible before quoting a single ringgit. The result feels like it was always meant to be this way.', name: 'Mr. & Mrs. Tan', project: 'Semi-D · Alma' },
+        { quote: 'The open-book costing changed everything for us. There was never a surprise invoice, never a vague variation order. Just quiet competence, month after month.', name: 'Dr. Harvinder S.', project: 'Bungalow · Kulim' },
+        { quote: 'Our renovation ran while we lived abroad. The weekly reports were so thorough we never once felt out of touch. We returned to a finished home — and it was better than the renders.', name: 'En. Azlan & Pn. Farah', project: 'Bungalow · Simpang Ampat' },
       ],
       formName, formPhone, formEmail, formProperty, formBudget, formMessage,
       hasError: !!errorMsg, errorMsg,
       formDone, formNotDone: !formDone,
+      formSubmitting,
       onField, submitForm, resetForm,
       showWhatsApp,
     };
-  }, [page, pFilter, cFilter, formName, formPhone, formEmail, formProperty, formBudget, formMessage, errorMsg, formDone, showPricing, showWhatsApp, go, onField, submitForm, resetForm]);
+  }, [page, pFilter, cFilter, formName, formPhone, formEmail, formProperty, formBudget, formMessage, errorMsg, formDone, formSubmitting, showPricing, showWhatsApp, go, onField, submitForm, resetForm]);
 }

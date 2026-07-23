@@ -291,7 +291,8 @@ nav span[style*='cursor:pointer']:hover::after {
   }
 
   .header-nav,
-  .header-cta-desktop {
+  .header-cta-desktop,
+  .header-nav-row {
     display: none !important;
   }
 

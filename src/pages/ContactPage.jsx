@@ -15,6 +15,7 @@ export default function ContactPage({
     errorMsg,
     formDone,
     formNotDone,
+    formSubmitting,
     onField,
     submitForm,
     resetForm,
@@ -43,23 +44,22 @@ export default function ContactPage({
             <Reveal as="section" style={{ maxWidth: '1200px', margin: '0 auto', padding: '72px 40px 88px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(400px,100%),1fr))', gap: 'clamp(40px,6vw,80px)' }}>
                 <div>
                     <div style={eyebrow}>Contact us</div>
-                    <h1 style={{ ...h1, fontSize: 'clamp(32px,4vw,44px)', marginBottom: '18px' }}>Get a free quote</h1>
+                    <h1 style={{ ...h1, fontSize: 'clamp(32px,4vw,44px)', marginBottom: '18px' }}>Arrange a site consultation</h1>
                     <p style={{ ...body, margin: '0 0 40px' }}>
                         Tell us a little about your property and we'll get back to you within one working day — with honest advice and a clear idea of cost.
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
                         <div style={{ borderTop: `1px solid ${COLORS.line}`, paddingTop: '18px' }}>
-                            <div style={{ ...h3, fontSize: '16px', marginBottom: '6px' }}>Visit our office</div>
+                            <div style={{ ...h3, fontSize: '16px', marginBottom: '6px' }}>Our location</div>
                             <div style={{ fontSize: '15px', lineHeight: '1.7', color: COLORS.body }}>
-                                23, Jalan Profesor Diraja Ungku Aziz,<br />
-                                Seksyen 13, 46200 Petaling Jaya, Selangor
+                                Bukit Mertajam, Pulau Pinang
                             </div>
                         </div>
                         <div style={{ borderTop: `1px solid ${COLORS.line}`, paddingTop: '18px' }}>
-                            <div style={{ ...h3, fontSize: '16px', marginBottom: '6px' }}>Call or email</div>
+                            <div style={{ ...h3, fontSize: '16px', marginBottom: '6px' }}>WhatsApp or email</div>
                             <div style={{ fontSize: '15px', lineHeight: '1.7', color: COLORS.body }}>
-                                +60 3 7931 2288<br />
-                                hello@leapedge.my
+                                WhatsApp +60 17-438 9294<br />
+                                leapedge8228@gmail.com
                             </div>
                         </div>
                         <div style={{ borderTop: `1px solid ${COLORS.line}`, paddingTop: '18px' }}>
@@ -129,8 +129,20 @@ export default function ContactPage({
                             {hasError && (
                                 <div style={{ marginTop: '18px', fontSize: '14px', color: '#C0392B', fontWeight: '500' }}>{errorMsg}</div>
                             )}
-                            <button type="button" onClick={submitForm} style={{ ...btnPrimary, marginTop: '28px', width: '100%', padding: '16px' }}>
-                                Send My Enquiry
+                            <button
+                                type="button"
+                                onClick={submitForm}
+                                disabled={formSubmitting}
+                                style={{
+                                    ...btnPrimary,
+                                    marginTop: '28px',
+                                    width: '100%',
+                                    padding: '16px',
+                                    opacity: formSubmitting ? 0.7 : 1,
+                                    cursor: formSubmitting ? 'wait' : 'pointer',
+                                }}
+                            >
+                                {formSubmitting ? 'Sending…' : 'Send My Enquiry'}
                             </button>
                             <div style={{ marginTop: '14px', fontSize: '13px', color: COLORS.muted, textAlign: 'center' }}>
                                 Your details stay with us. No marketing lists, ever.

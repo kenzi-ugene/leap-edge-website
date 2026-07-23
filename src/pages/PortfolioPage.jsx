@@ -7,7 +7,7 @@ export default function PortfolioPage({ portfolioFilters, filteredProjects }) {
     return (
         <div data-screen-label="Portfolio">
             <Reveal as="section" style={{ ...section, paddingBottom: '40px' }}>
-                <div style={eyebrow}>Our work</div>
+                <div style={eyebrow}>Our projects</div>
                 <h1 style={{ ...h1, marginBottom: '14px' }}>Completed homes</h1>
                 <p style={{ ...body, maxWidth: '600px', margin: '0 0 32px' }}>
                     A selection of homes we have designed and built. Filter by property type to see projects like yours.

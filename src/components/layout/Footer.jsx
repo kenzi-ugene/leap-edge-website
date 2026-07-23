@@ -20,12 +20,11 @@ export default function Footer({ navItems }) {
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '9px', marginBottom: '16px' }}>
                         <span style={{ fontSize: '22px', fontWeight: '700' }}>Leap Edge</span>
                         <span style={{ fontSize: '11px', letterSpacing: '.14em', textTransform: 'uppercase', color: '#7FB2F0', fontWeight: '600' }}>
-                            Interiors
+                            Renovation
                         </span>
                     </div>
                     <p style={{ fontSize: '14.5px', lineHeight: '1.75', color: 'rgba(255,255,255,.75)', maxWidth: '340px', margin: 0 }}>
-                        Design &amp; build for landed homes across the Klang Valley since 2012.
-                        CIDB Grade G7 registered contractor with in-house designers and builders.
+                        Based in Bukit Mertajam, serving across Penang Mainland, Island, Kedah &amp; Perak.
                     </p>
                 </div>
                 <div>
@@ -45,10 +44,10 @@ export default function Footer({ navItems }) {
                 <div>
                     <div style={{ fontSize: '13px', letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', fontWeight: '600', marginBottom: '16px' }}>Contact</div>
                     <div style={{ fontSize: '14.5px', lineHeight: '2', color: 'rgba(255,255,255,.85)' }}>
-                        23, Jalan Profesor Diraja Ungku Aziz<br />
-                        Seksyen 13, 46200 Petaling Jaya<br />
-                        +60 3 7931 2288<br />
-                        hello@leapedge.my<br />
+                        Bukit Mertajam, Pulau Pinang<br />
+                        Site consultations by appointment<br />
+                        WhatsApp +60 17-438 9294<br />
+                        leapedge8228@gmail.com<br />
                         Mon–Sat, 10:00am – 7:00pm
                     </div>
                 </div>
@@ -67,8 +66,8 @@ export default function Footer({ navItems }) {
                         color: 'rgba(255,255,255,.6)',
                     }}
                 >
-                    <span>© 2026 Leap Edge Sdn Bhd (1234567-X)</span>
-                    <span>Kuala Lumpur · Selangor</span>
+                    <span>© 2026 Leap Edge Renovation (PG0489415-K). All rights reserved.</span>
+                    <span>Penang · Bukit Mertajam</span>
                 </div>
             </div>
         </footer>

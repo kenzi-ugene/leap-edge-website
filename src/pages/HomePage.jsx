@@ -22,15 +22,15 @@ export default function HomePage({
             {/* Hero — who we are and what we do, in one glance */}
             <Reveal as="section" style={{ ...section, padding: '64px 40px 72px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(420px,100%),1fr))', gap: 'clamp(36px,5vw,64px)', alignItems: 'center' }}>
                 <div>
-                    <div style={eyebrow}>Design &amp; Build · Kuala Lumpur &amp; Selangor · Since 2012</div>
+                    <div style={eyebrow}>Bukit Mertajam · Penang Mainland · Over 10 Years&rsquo; Experience</div>
                     <h1 style={{ fontSize: 'clamp(38px,4.8vw,60px)', lineHeight: '1.12', fontWeight: '700', letterSpacing: '-.015em', margin: '0 0 22px', textWrap: 'balance', color: COLORS.ink }}>
-                        We design and build landed homes — <span style={{ color: 'var(--accent)' }}>one team, one contract</span>.
+                        We renovate landed homes — from extension to final finishing. <span style={{ color: 'var(--accent)' }}>One team. One point of contact.</span>
                     </h1>
                     <p style={{ ...body, maxWidth: '520px', margin: '0 0 18px' }}>
-                        Bungalows, semi-Ds, and terrace homes across the Klang Valley. From first sketch to final key: design, construction, and furnishing handled by our own in-house team.
+                        Based in Bukit Mertajam, Leap Edge Renovation provides reliable, practical, end-to-end renovation solutions for landed homes. We are your perfect main-con from masonry works, to plumbing, electrical, tiling, ceilings, awnings, kitchen extensions and carpentry coordination, we manage your project from site inspection to final handover.
                     </p>
                     <ul style={{ margin: '0 0 32px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        {['Free, no-obligation consultation', 'Itemised open-book quotations — no hidden costs', '24-month workmanship warranty'].map((point) => (
+                        {['Free, no-obligation consultation', 'Itemised open-book quotations — no hidden costs', 'Local project coordination from commencement to handover'].map((point) => (
                             <li key={point} style={{ ...small, display: 'flex', gap: '10px', alignItems: 'baseline', color: COLORS.ink }}>
                                 <span style={{ color: 'var(--accent)', fontWeight: '700' }}>✓</span>
                                 {point}
@@ -38,21 +38,21 @@ export default function HomePage({
                         ))}
                     </ul>
                     <div style={{ display: 'flex', gap: '14px', alignItems: 'center', flexWrap: 'wrap' }}>
-                        <button type="button" onClick={goContact} style={btnPrimary}>Get a Free Quote</button>
-                        <button type="button" onClick={goPortfolio} style={btnSecondary}>See Our Work</button>
+                        <button type="button" onClick={goContact} style={btnPrimary}>Arrange a Site Consultation</button>
+                        <button type="button" onClick={goPortfolio} style={btnSecondary}>See Our Projects</button>
                     </div>
                 </div>
                 <div style={{ position: 'relative' }}>
                     <ImageSlot id="hero-main" placeholder="Hero — signature project photo" shape="rounded" style={imgBlock('500px')} />
                     <div style={{ position: 'absolute', left: '20px', bottom: '20px', background: '#FFFFFF', borderRadius: '12px', boxShadow: '0 8px 28px rgba(22,35,58,.14)', padding: '18px 22px', maxWidth: '260px' }}>
                         <div style={{ ...h3, fontSize: '17px' }}>Stillwater Residence</div>
-                        <div style={{ fontSize: '13px', color: COLORS.muted, marginTop: '4px' }}>Country Heights · 9,600 sq ft</div>
+                        <div style={{ fontSize: '13px', color: COLORS.muted, marginTop: '4px' }}>Bukit Mertajam · 3,400 sq ft</div>
                     </div>
                 </div>
             </Reveal>
 
             {/* Stats band */}
-            <section style={{ borderTop: `1px solid ${COLORS.line}`, borderBottom: `1px solid ${COLORS.line}`, background: COLORS.band }}>
+            {/* <section style={{ borderTop: `1px solid ${COLORS.line}`, borderBottom: `1px solid ${COLORS.line}`, background: COLORS.band }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 40px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '28px' }}>
                     {stats.map((s, i) => (
                         <Reveal key={s.label} delay={i * 80} style={{ textAlign: 'center' }}>
@@ -61,15 +61,15 @@ export default function HomePage({
                         </Reveal>
                     ))}
                 </div>
-            </section>
+            </section> */}
 
             {/* Services — three clear cards */}
             <Reveal as="section" style={{ ...section, padding: '80px 40px 72px' }}>
                 <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 44px' }}>
                     <div style={eyebrow}>What we do</div>
-                    <h2 style={h2}>Three services, one accountable team</h2>
+                    <h2 style={h2}>We plan, refurbish, restructure, rebuild and renovate.</h2>
                     <p style={{ ...body, margin: '14px 0 0' }}>
-                        The team that designs your home is the team that builds it — and warrants it.
+                        Whether you are refurbishing an existing space, rebuilding an ageing section or restructuring your home layout, Leap Edge Renovation manages the process from planning to completion.
                     </p>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '24px' }}>
@@ -84,7 +84,7 @@ export default function HomePage({
                     ))}
                 </div>
                 <div style={{ textAlign: 'center', marginTop: '32px' }}>
-                    <span onClick={goServices} style={link}>View all services →</span>
+                    <span onClick={goServices} style={link}>Explore Our Services →</span>
                 </div>
             </Reveal>
 
@@ -140,9 +140,9 @@ export default function HomePage({
             <section style={{ background: COLORS.band, borderTop: `1px solid ${COLORS.line}`, borderBottom: `1px solid ${COLORS.line}` }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '64px 40px', textAlign: 'center' }}>
                     <div style={eyebrow}>Where we work</div>
-                    <h2 style={{ ...h2, marginBottom: '14px' }}>Serving homes across the Klang Valley</h2>
+                    <h2 style={{ ...h2, marginBottom: '14px' }}>Renovation services across Penang Mainland</h2>
                     <p style={{ ...body, maxWidth: '560px', margin: '0 auto 28px' }}>
-                        Our office and material library are in Petaling Jaya — visit us, or we'll come to your property for a site visit.
+                        Based in Bukit Mertajam, showroom in Sungai Petani, visit us, or we'll come to your property for a site visit.
                     </p>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', marginBottom: '32px' }}>
                         {serviceAreas.map((area) => (
@@ -151,17 +151,17 @@ export default function HomePage({
                             </span>
                         ))}
                     </div>
-                    <button type="button" onClick={goContact} style={btnPrimary}>Book a Site Visit</button>
+                    <button type="button" onClick={goContact} style={btnPrimary}>Arrange a Free Site Consultation</button>
                 </div>
             </section>
 
             {/* How it works teaser + testimonial */}
             <Reveal as="section" style={{ ...section, padding: '80px 40px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(380px,100%),1fr))', gap: 'clamp(36px,5vw,64px)', alignItems: 'center' }}>
                 <div>
-                    <div style={eyebrow}>How it works</div>
+                    <div style={eyebrow}>How we work</div>
                     <h2 style={{ ...h2, marginBottom: '16px' }}>A clear process from day one</h2>
                     <p style={{ ...body, margin: '0 0 24px' }}>
-                        Six straightforward steps — consultation, design, quotation, then construction with weekly photo updates. You always know where your project stands and what it costs.
+                        We begin with a site consultation to understand your requirements, budget and property condition. From planning and quotation to construction and final inspection, our team coordinates each stage and keeps you updated on the project&rsquo;s progress.
                     </p>
                     <span onClick={goProcess} style={link}>See the full process →</span>
                 </div>
@@ -170,8 +170,8 @@ export default function HomePage({
                     <p style={{ fontSize: '18.5px', lineHeight: '1.6', color: COLORS.ink, margin: '0 0 18px', fontWeight: '500' }}>
                         They treated our home with the same care we do. Every ringgit was accounted for — and they handed over two weeks early.
                     </p>
-                    <div style={{ fontSize: '14px', fontWeight: '600', color: COLORS.ink }}>Datin Serena L.</div>
-                    <div style={{ fontSize: '13px', color: COLORS.muted, marginBottom: '18px' }}>Bungalow · Damansara Heights</div>
+                    <div style={{ fontSize: '14px', fontWeight: '600', color: COLORS.ink }}>Mr Yong, Homeowner</div>
+                    <div style={{ fontSize: '13px', color: COLORS.muted, marginBottom: '18px' }}>d&rsquo;Courtyards, Taman Serikaya, Bukit Mertajam</div>
                     <span onClick={goClients} style={{ ...link, fontSize: '14.5px' }}>Read more reviews →</span>
                 </div>
             </Reveal>
@@ -182,11 +182,11 @@ export default function HomePage({
                     <div>
                         <h2 style={{ ...h2, color: '#FFFFFF', marginBottom: '12px' }}>Ready to talk about your home?</h2>
                         <p style={{ fontSize: '16px', color: 'rgba(255,255,255,.82)', margin: 0, maxWidth: '520px', lineHeight: '1.7' }}>
-                            Tell us about your property and we'll get back to you within one working day — with honest advice, whether or not you build with us.
+                            Based in Bukit Mertajam, CIDB Grade G3 registered contractor with dedicated project manager for each project.
                         </p>
                     </div>
                     <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-                        <button type="button" onClick={goContact} style={{ ...btnPrimary, padding: '16px 34px' }}>Get a Free Quote</button>
+                        <button type="button" onClick={goContact} style={{ ...btnPrimary, padding: '16px 34px' }}>Arrange a Site Consultation</button>
                     </div>
                 </div>
             </Reveal>

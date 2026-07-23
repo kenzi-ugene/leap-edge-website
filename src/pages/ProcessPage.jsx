@@ -6,10 +6,10 @@ export default function ProcessPage({ steps, goContact }) {
     return (
         <div data-screen-label="Process">
             <Reveal as="section" style={{ maxWidth: '1200px', margin: '0 auto', padding: '72px 40px 56px' }}>
-                <div style={eyebrow}>How it works</div>
+                <div style={eyebrow}>How we work</div>
                 <h1 style={{ ...h1, maxWidth: '760px' }}>Six clear steps, no surprises</h1>
                 <p style={{ ...body, maxWidth: '620px', margin: 0 }}>
-                    A typical full home takes eight to fourteen months. At every step you know exactly where the project stands, what it costs, and what comes next.
+                    A typical renovation takes six weeks to twelve months, depending on scope. At every step you know exactly where the project stands, what it costs, and what comes next.
                 </p>
             </Reveal>
 
