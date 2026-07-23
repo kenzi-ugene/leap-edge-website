@@ -39,5 +39,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: www.macbookairwithstones.online
+          cname: www.leapedgerenovation.com.my
           force_orphan: true
